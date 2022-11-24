@@ -1,0 +1,16 @@
+/*baner*/
+div#first-card{
+    margin: 0px 10px 0px 10px;
+    z-index: -1; /*muestra en segundo plano el banner*/
+  }
+  /*especificaciones extras par mostrar la imágen del banner*/
+  img.img-fluid{ 
+    max-width: 2500px;
+    min-width: 500px;
+    max-height: 300px;
+  }
+  #banner-edit{
+    text-align:right; 
+    margin: 0px 10px -50px 10px;
+  }
+  /*fin banner*/

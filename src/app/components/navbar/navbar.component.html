@@ -1,0 +1,61 @@
+<nav class="navbar navbar-collapse navbar-dark bg-secondary">
+    <div class="container-fluid">
+      <div class="navbar-brand" routerLink="" title="Si lo puedes imaginar, lo puedes programar">
+        <img src="../assets/images/argprog.png" alt="logo argentina programa" align="left" width="238" height="49" />
+      </div>
+      <div class="social-bar">
+        <a href="https://www.facebook.com/" class="icon icon-facebook" target="_blank" title="Facebook"></a>
+        <a href="https://www.instagram.com/" class="icon icon-instagram" target="_blank" title="Instagram"></a>
+        <a href="https://twitter.com/?lang=es" class="icon icon-twitter" target="_blank" title="Twitter"></a>
+        <a href="https://ar.linkedin.com/" class="icon icon-linkedin2" target="_blank" title="LinkedIn"></a>
+      </div>
+      <button type="button" class="btn btn-outline-primary" 
+        title="Modo de edición" (click)="login()"
+        *ngIf="loginService.modoEdicion" id="btnLogin">Logout</button> <!--showElement(true)-->
+      <button type="button" class="btn btn-outline-primary" 
+        title="Acceso de edición" (click)="login()"
+        *ngIf="!loginService.modoEdicion" id="btnLogin">Login</button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+          data-bs-target="#navbarSupportedContent" 
+          aria-controls="navbarSupportedContent" 
+          aria-expanded="false" aria-label="Toggle navigation" title="Acceso a secciones">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="container collapse" id="navbarSupportedContent">
+        <ol style="float:right;"> <!--class="me-auto mb-2 mb-lg-0 "-->
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" 
+              data-bs-target="#navbarSupportedContent" 
+              routerLink="">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" 
+              data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              routerLink="/acerca-de"
+              >Acerca de</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" 
+            routerLink="/experiencia"
+            >Experiencia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              routerLink="/educacion">Educación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              routerLink="/habilidades">Habilidades</a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+            routerLink="/proyectos">Proyectos</a>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+  </nav>
+

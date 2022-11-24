@@ -1,0 +1,51 @@
+/*----Enlace a redes sociales*/
+.social-bar {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    float: right;
+    flex-wrap: wrap;
+  }
+  .icon {
+    background-color: lightblue;
+    text-decoration: none;
+    padding: .7rem;
+    display: flex;
+    transition: all .5s;
+  }
+  .icon-facebook {
+    color: blue; /* #2E406E */
+  }
+  .icon-instagram {
+    color: red; /*#3F60A5*/
+  }
+  .icon-twitter {
+    color: #7085b1; /*#339DC5*/
+  }
+  .icon-linkedin2{
+    color: #358baa;
+  }
+  /*pseudo clases para social bar*/
+  .icon:first-child {
+    border-radius: 1rem 0 0 1rem;
+  }
+  .icon:last-child{
+    border-radius: 0 1rem 1rem 0;
+  }
+  .icon:hover {
+      padding-right: 3rem;
+      border-radius: 1rem 1rem 1rem 1rem;
+      box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.42);
+  }
+  /*fin social bar*/
+  /*botón login*/
+.btn{
+    background-color: lightblue;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-left: 5px;
+    display: flex;
+    float: left;
+    width: 100px;
+  }

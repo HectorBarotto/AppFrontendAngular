@@ -1,0 +1,45 @@
+/*acerca de - article-semántico - reglas extras a la sección*/
+/*define ubicación para imágen perfil*/
+.rounded-circle{ 
+  margin-left: 2%;
+  background-color: transparent;
+}
+.style-img-perfil-in-home{
+  margin-top: -80px;
+}
+.style-img-perfil-not-in-home{ 
+  margin-top: 10px;
+}
+/*fin imágen de perfil*/
+/*efecto zoom de la imagen*/
+.img-perfil{
+    width: 187px;
+    height: 221px;
+    transition: 0.5s;
+    object-fit: cover;
+  }
+.img-perfil:hover{
+    transform: scale(1.2);
+  }
+/*fin zoom imágen de perfil*/
+
+/* contenedor table responsive*/
+#contenedor-Info { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 10px;
+  }
+/*table 2 columnas responsive sin el uso de bootstrap5*/
+#contenedor-Info > div { 
+    width: 50%;
+    float: left;
+    display: flex;
+}
+div#info-contact > span { 
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+  

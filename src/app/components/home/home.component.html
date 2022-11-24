@@ -1,0 +1,39 @@
+
+<header>
+    <!-- banner-->
+    <div id="banner-edit" *ngIf="loginService.modoEdicion"> <!-- [hidden]="loginService.mostrarIconos"   -->
+      <a href="#" >
+        <i class="bi bi-pencil-square" title="editar"></i>
+      </a>
+    </div>
+    <div class="card mat-card" id="first-card">
+      <img class="img-fluid" src="../assets/images/junin.png" alt="Parque Natural -JUNIN(B)"/>
+    </div>
+</header>
+
+  <section>
+    <app-acerca-de [styleInHome]="stylePerfil"></app-acerca-de>
+  </section>
+  
+  <section>
+    <app-experiencia></app-experiencia>
+  </section>
+  
+  <section>
+    <app-educacion></app-educacion>
+  </section>
+  
+  <section>
+    <app-habilidades></app-habilidades>
+  </section>
+  
+  <section>
+    <app-proyectos></app-proyectos>
+  </section>
+  
+  <aside> <!-- sección de contenido dinamico indirecto relacionado al documento-->
+  </aside>
+  
+  <footer> <!-- pie de página -->
+    <a href="#" align="right" style="color:black;"><h4>Ir al inicio</h4></a>
+  </footer>
