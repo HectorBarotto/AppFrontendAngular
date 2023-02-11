@@ -9,11 +9,13 @@ import { LoginService} from '../../services/login.service';
 export class HomeComponent implements OnInit {
 
   stylePerfil = "style-img-perfil-in-home";
+  urlBanner!: string;
 
   constructor(public loginService : LoginService) { 
   }
 
   ngOnInit(): void {
+    this.urlBanner = this.loginService.datosPersonales.urlBanner;
   }
 
 }

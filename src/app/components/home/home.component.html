@@ -7,10 +7,19 @@
       </a>
     </div>
     <div class="card mat-card" id="first-card">
-      <img class="img-fluid" src="../assets/images/junin.png" alt="Parque Natural -JUNIN(B)"/>
+      <img class="img-fluid" 
+        src="{{urlBanner}}" 
+        alt="Parque Natural -JUNIN(B)"
+        onerror="this.src='../assets/images/junin.png'"/>
     </div>
-</header>
+    <div class="container mt-4" *ngIf="!loginService.getUserLogged()">
+      <h3>Bienvenidos a Portfolio /Argentina Programa</h3>
+      <h4>Mediante Login -Inicio de sesión- acceso a contenido</h4>
+    </div>
 
+
+</header>
+<div *ngIf="loginService.getUserLogged()">
   <section>
     <app-acerca-de [styleInHome]="stylePerfil"></app-acerca-de>
   </section>
@@ -37,3 +46,5 @@
   <footer> <!-- pie de página -->
     <a href="#" align="right" style="color:black;"><h4>Ir al inicio</h4></a>
   </footer>
+</div>
+

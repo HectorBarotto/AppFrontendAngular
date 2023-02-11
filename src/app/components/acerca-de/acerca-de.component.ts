@@ -7,13 +7,14 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./acerca-de.component.css']
 })
 export class AcercaDeComponent implements OnInit {
-
+  urlFoto!: string;
   @Input() styleInHome: string = "style-img-perfil-not-in-home";
 
   constructor(public loginService : LoginService) {
   }
-
+  
   ngOnInit(): void {
+    this.urlFoto = this.loginService.datosPersonales.urlFoto;
   }
   
 }

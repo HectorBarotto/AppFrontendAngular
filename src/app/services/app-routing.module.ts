@@ -18,7 +18,7 @@ const routes: Routes = [{path: '', component: HomeComponent},
 {path: 'educacion', component: EducacionComponent},
 {path: 'habilidades', component: HabilidadesComponent},
 {path: 'proyectos', component: ProyectosComponent},
-{path: 'login', component: LoginComponent},
+{path: 'login/:eForm', component: LoginComponent},
 {path: '**', component: PageNotFoundComponent}];
 
 

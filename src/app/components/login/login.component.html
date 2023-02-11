@@ -1,37 +1,44 @@
 <section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="container py-0">
+      <div class="row d-flex justify-content-center 
+        align-items-center h-100 mt-5"  *ngIf="verForm == eForm.INICIO">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card bg-primary text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
   
-              <div class="mb-md-0 mt-md-4 pb-0">
+              <div class="mb-md-0 mt-md-0 pb-0">
   
-                <h2 class="fw-bold mb-0 text-uppercase">Iniciar Sesión</h2>
-                <p class="text-white-50 mb-5">
+                <h2 class="fw-bold mb-2 text-uppercase">Iniciar Sesión</h2>
+                <p class=" fs-6 mb-2">
                   Por favor, introduce tu usuario y contraseña!</p> <!--Please enter your login and password!-->
-  
-                <div class="form-outline form-white mb-4">
+                <div class="form-outline form-white mb-2">
                     <input type="email" id="typeEmailX" 
-                    class="form-control form-control-lg" #usuario
+                    class="form-control form-control-lg" 
                     placeholder="Ingrese entre 5 y 50 caracteres"
-                    minlength="5" maxlength="50"/>
-                    <label class="form-label" for="typeEmailX">Email</label>
+                    minlength="5" maxlength="50"
+                    [(ngModel)]= "usuario.userName"/>
+                    <label class="form-label" for="typeEmailX">Email ó Nombre de Usuario</label>
                 </div>
   
-                <div class="form-outline form-white mb-4">
+                <div class="form-outline form-white mb-2">
                   <input type="password" id="typePasswordX" 
                     class="form-control form-control-lg" 
-                    placeholder="Ingrese entre 5 y 10 caracteres" #pw/>
+                    placeholder="Ingrese entre 4 y 10 caracteres" 
+                    minlength="4" maxlength="10"
+                    [(ngModel)]= "usuario.password"/>
                   <label class="form-label" for="typePasswordX">
                     Contraseña</label>
-                  <p class="text-white-50 mb-5">
-                    (Letras y/o números entre 5 y 10 caracteres)</p>
+                    <!--
+                  <p class="text-white-0 mb-0">
+                    (Letras y/o números entre 4 y 10 caracteres)</p>
+                    -->
                 </div>
                 
-                <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="#!">Cancelar Inicio de Sesión.</a></p>
+                <p class="small mb-3 pb-lg-2">
+                  <a class="text-white" href="#!">Cancelar Inicio de Sesión.</a></p>
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" 
-                (click)="iniciarSesion(usuario.value, pw.value)">Iniciar Sesión</button>
+                (click)="iniciarSesion()">Iniciar Sesión</button>
+
                 <!--
                 <div class="d-flex justify-content-center text-center mt-4 pt-1">
                   <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -39,14 +46,166 @@
                   <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
                 </div>
                 -->
+
               </div>
               <div>
-                <p class="mb-0">No tienes una cuenta? <a href="#!" class="text-white-50 fw-bold">Inscribirse</a>
+                <br />
+                <p class="mb-0" >No tienes una cuenta? 
+                  <button class="btn btn-outline-light btn-lg px-5" type="submit" 
+                (click)="ocultarFormInicioSesion()">Inscribirse</button>
+                 <!-- <a href="#!" class="text-white-50 fw-bold">Inscribirse</a> -->
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="row d-flex justify-content-center 
+        align-items-center h-100 mt-5"  *ngIf="verForm == eForm.CUENTA">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-secondary text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mb-md-0 mt-md-0 pb-0">
+  
+                <h2 class="fw-bold mb-2 text-uppercase">Administrar Cuenta</h2>
+                <p class="text-white">
+                  Hola! {{datos.nombre}} <br> Bienvenido al Portfolio </p>  
+                <p class="text-white">Tienes acceso como Usuario <b>{{tipoUsuario}}</b></p> 
+                <p class="text-white mb-4">Aquí podrás Modificar tus Datos Personales
+                  ó darte de baja como Usuario.</p>
+                <button class="btn btn-outline-light btn-lg px-5 mb-4" type="submit" 
+                (click)="modificarDatos()">Modificar Datos</button>
+                <button class="btn btn-outline-light btn-lg px-5 mb-4" type="submit" 
+                (click)="bajaUsuario()">Baja de Usuario</button>
+                <p class="small mb-4 pb-lg-2">
+                  <a class="text-white" href="#!" (click)="irAHome()"><b>Ir a la Página Principal</b></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid" *ngIf="verForm == eForm.MODIFICA">
+        <h2 class="fw-bold mb-2 text-uppercase">Ingreso de Datos</h2>
+        
+        <div class="row g-2">
+          <h5>Datos de usuario:</h5>
+          <div class="col">
+            <label class="form-label">Nombre de usuario ó Email:</label>
+            <input type="email" id="typeEmailX" 
+              class="form-control" 
+              placeholder="Ingrese entre 5 y 50 caracteres"
+              minlength="5" maxlength="50"
+              [(ngModel)]= "usuario.userName"/>
+          </div>
+          <div class="col">
+            <label class="form-label">Contraseña:</label>
+            <input type="password" class="form-control" 
+              id="typePasswordX"
+              placeholder="Ingrese entre 4 y 10 caracteres" 
+              minlength="4" maxlength="10"
+              [(ngModel)]= "usuario.password"/>
+          </div>
+        </div>
+        <div class="row col-12 " id="map_section">
+          <h5>Datos Personales:</h5>
+          <div class="form-outline form-white mb-0 col-6">
+            <label class="form-label">Nombre:</label>
+            <input type="text" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="45"
+            [(ngModel)]= "datos.nombre"/>
+          </div>
+          <div class="form-outline form-white mb-0 col-6">
+            <label class="form-label">Apellido:</label>
+            <input type="text" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="45"
+            [(ngModel)]= "datos.apellido"/>
+          </div>
+          <div class="form-outline form-white mb-0 col-6">
+            <label class="form-label">Domicilio:</label>
+            <input type="text" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="45"
+            [(ngModel)]= "datos.domicilio"/>
+          </div>
+          <div class="form-outline form-white col-6 mb-0">
+            <label class="form-label">Telefono:</label>
+            <input type="text" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="15"
+            [(ngModel)]= "datos.telefono"/>
+          </div>
+          <div class="form-outline form-white mb-0 col-8">
+            <label class="form-label">Email:</label>
+            <input type="email" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="100"
+            [(ngModel)]= "datos.email"/>
+          </div>
+          <div class="form-outline form-white col-4 mb-0">
+            <label class="form-label">Fecha Nacimiento:</label>
+            <input type="date" class="form-control form-control-sm" 
+            placeholder="dd/mm/aaaa" minlength="8" maxlength="10"
+            [(ngModel)]= "datos.fechaNac"/>
+          </div>
+          <div class="form-outline form-white mb-0">
+            <label class="form-label">Sobre Mi:</label>
+            <input type="text" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="200"
+            [(ngModel)]= "datos.sobreMi"/>
+          </div>
+          <div class="form-outline form-white mb-0">
+            <label class="form-label">URL Foto:</label>
+            <input type="text" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="100"
+            [(ngModel)]= "datos.urlFoto"/>
+          </div>
+          <div class="form-outline form-white">
+            <label class="form-label">URL Banner:</label>
+            <input type="text" class="form-control form-control-sm" 
+            placeholder="" minlength="5" maxlength="100"
+            [(ngModel)]= "datos.urlBanner"/>
+          </div>
+        </div>
+        <div class="row g-3 ">
+          <div class="col">
+            <button class="btn btn-outline-light btn-lg px-5" 
+            type="submit" 
+            (click)="guardarDatos()">Guardar</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-outline-light btn-lg px-5" 
+            type="submit" 
+            (click)="irAHome()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center 
+      align-items-center h-100 mt-5" *ngIf="verForm == eForm.BAJA">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-danger text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <h3>Confirma Baja de Usuario?</h3>
+              <h4>Si presiona -Aceptar- el Usuario:<br>
+                <b>{{usuario.userName}}</b><br>será eliminado.</h4>
+              <div class="row g-3">
+                <div class="col-md-6 mt-4">
+                  <button id="submit" name="submit" 
+                    class="btn btn-outline-light btn-lg px-5" 
+                    value="1" (click)="darBajaUsuario()">Aceptar</button>
+                </div>
+                <div class="col-md-6 mt-4">
+                  <button class="btn btn-outline-light btn-lg px-5" 
+                    type="submit" 
+                    (click)="irAHome()">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    
   </section>
+
+

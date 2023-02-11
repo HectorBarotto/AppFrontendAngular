@@ -1,6 +1,7 @@
-<div class="container-fluid seccion">
+<div class="container-fluid seccion" *ngIf="loginService.getUserLogged()">
     <div>
-        <img src="../assets/images/perfil.png" 
+        <img src="{{urlFoto}}"
+            onerror="this.src='../assets/images/perfil.png'"
             class="rounded-circle {{styleInHome}} img-perfil"
             title="image farm"
             alt="mi perfil"/>
