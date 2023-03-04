@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-export enum Form{'INICIO', 'CUENTA', 'MODIFICA', 'BAJA'};
+export enum Form{'INICIO', 'CUENTA', 'AGREGA', 'MODIFICA', 'BAJA'};
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,19 @@ export class LoginService {
   private url = "/api/";
   private _modoEdicion = false;
   private _usuario = {id: 0, userName:"", password:"", isOwner:false};
+  //Datos personales del propietario
   private _idDatosPersonales = 0;
   private _datosPersonales = {id: 0, nombre:"", apellido:"", domicilio:"", telefono:"",
   email:"", fechaNac:"", sobreMi:"", urlFoto:"", 
   urlBanner:"", idUsuarioFK: 0};
+  //Datos personales del invitado al portfolio (quedan registrados)
+  private _idDatosPersonalesInv = 0;
+  private _datosPersonalesInv = {id: 0, nombre:"", apellido:"", domicilio:"", telefono:"",
+  email:"", fechaNac:"", sobreMi:"", urlFoto:"", 
+  urlBanner:"", idUsuarioFK: 0};
+  
+  private _urlFoto_bak!: string;
+  private _urlBanner_bak!: string;
 
   constructor(private http: HttpClient , 
     private cookies: CookieService) {}
@@ -92,7 +101,7 @@ login(user: any): Observable<any> {
   public set usuario(user : any){
     this._usuario = user;
   }
-
+//Datos personales del propietario
   public get datosPersonales(): any{
     return this._datosPersonales;
   }
@@ -105,6 +114,34 @@ login(user: any): Observable<any> {
   }
   public set idDatosPersonales(id){
     this._idDatosPersonales = id;
+  }
+//Datos personales del invitado
+public get datosPersonalesInv(): any{
+  return this._datosPersonalesInv;
+}
+public set datosPersonalesInv(datos : any){
+  this._datosPersonalesInv = datos;
+}
+
+public get idDatosPersonalesInv(){
+  return this._idDatosPersonalesInv;
+}
+public set idDatosPersonalesInv(id){
+  this._idDatosPersonalesInv = id;
+}  
+//guarda el último dato validado para restaurar ante un error 404 not found
+  public get urlFoto_bak(){
+    return this._urlFoto_bak;
+  }
+  public set urlFoto_bak(urlFoto: string){
+    this._urlFoto_bak = urlFoto;
+  }
+
+  public get urlBanner_bak(){
+    return this._urlBanner_bak;
+  }
+  public set urlBanner_bak(urlBanner: string){
+    this._urlBanner_bak = urlBanner;
   }
 
   public get modoEdicion():boolean{

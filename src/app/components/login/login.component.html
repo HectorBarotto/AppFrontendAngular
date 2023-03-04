@@ -1,7 +1,8 @@
 <section class="vh-100 gradient-custom">
     <div class="container py-0">
       <div class="row d-flex justify-content-center 
-        align-items-center h-100 mt-5"  *ngIf="verForm == eForm.INICIO">
+        align-items-center h-100 mt-5"  
+        *ngIf="verForm == eForm.INICIO">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card bg-primary text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
@@ -28,10 +29,7 @@
                     [(ngModel)]= "usuario.password"/>
                   <label class="form-label" for="typePasswordX">
                     Contraseña</label>
-                    <!--
-                  <p class="text-white-0 mb-0">
-                    (Letras y/o números entre 4 y 10 caracteres)</p>
-                    -->
+                    
                 </div>
                 
                 <p class="small mb-3 pb-lg-2">
@@ -51,9 +49,10 @@
               <div>
                 <br />
                 <p class="mb-0" >No tienes una cuenta? 
-                  <button class="btn btn-outline-light btn-lg px-5" type="submit" 
-                (click)="ocultarFormInicioSesion()">Inscribirse</button>
-                 <!-- <a href="#!" class="text-white-50 fw-bold">Inscribirse</a> -->
+                  <button class="btn btn-outline-light btn-lg px-5" 
+                    type="submit" 
+                    (click)="ocultarFormInicioSesion()">Inscribirse
+                  </button>
                 </p>
               </div>
             </div>

@@ -10,6 +10,7 @@ import { Form } from '../../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
   private nombreUsuario: string = "";
   usuario = {id: 0, userName:"", password:"", isOwner: false};
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   tipoUsuario: string = "Invitado";
   editarDatos: boolean = false;
   loginerror: string = "";
-  eForm = Form; // var de uso en ngIf
+  eForm = Form; // var de uso en Template/ngIf
   verForm: Form = Form.CUENTA;
 
 
@@ -37,8 +38,11 @@ export class LoginComponent implements OnInit {
     if(this.loginService.getUserLogged()){ 
       this.usuario = this.loginService.usuario;
       this.nombreUsuario = this.usuario.userName;
-      //console.log("usuario id: "+ this.usuario.id);
-      this.getDatosPersonales(this.loginService.idDatosPersonales);
+      if(this.usuario.isOwner)
+        this.getDatosPersonales(this.loginService.idDatosPersonales);
+      else
+        this.getDatosPersonales(this.loginService.idDatosPersonalesInv);
+  
     }else{
       this.usuario = {id: 0, userName:"", password:"", isOwner: false};
       this.nombreUsuario = "";
@@ -72,10 +76,7 @@ export class LoginComponent implements OnInit {
             //Si encuentra el usuario en la DB habilita el Inicio de Sesión
             if (data != null) {
               this.nombreUsuario = data.userName;
-              /*
-              this.usuario.id = data.id;
-              this.usuario.isOwner = data.isOwner;
-              */
+
               this.usuario = data;
               this.loginService.usuario = this.usuario; //user;
               this.loginerror = "";
@@ -84,20 +85,23 @@ export class LoginComponent implements OnInit {
                 this.loginService.modoEdicion = true;
                 this.tipoUsuario = "Propietario";
               }
-              /*
-              if(!this.loginService.modoEdicion)
-                alert(this.usuario.userName + ": Acceso de Usuario Invitado.");
-              */
+
               console.log("Usuario con acceso: "+ this.usuario.userName);
               //Guardo en loginService el ID de DatosPersonales para relacionarlo con otros componentes
               this.loginService.listaDatosPersonales().subscribe( data => {
                 if(data != null){ //verifico no null para acceder a la propiedad
                   if(data.length > 0){
+                    //En todos los casos el id y los datos personales son propios para el portfolio
+                    this.loginService.datosPersonales = data[0];
+                    this.loginService.idDatosPersonales = data[0].id;
+                    //Se recorre una lista para obtener datos personales del usuario invitado a ver el portfolio
                     for(let i = 0; i < data.length; i++){
                       if(this.usuario.id == data[i].idUsuarioFK){
                         this.datos.nombre = data[i].nombre;
-                        this.loginService.datosPersonales = data[i];
-                        this.loginService.idDatosPersonales = data[i].id;
+                        if(!data[i].isOwner){
+                          this.loginService.datosPersonalesInv = data[i];
+                          this.loginService.idDatosPersonalesInv = data[i].id;
+                        }
                         i = data.length-1;
                       }
                     }
@@ -247,7 +251,11 @@ export class LoginComponent implements OnInit {
   modificarDatos(){
     this.verForm = Form.MODIFICA;
     this.editarDatos = true;
-    this.getDatosPersonales(this.loginService.idDatosPersonales);
+    if(this.usuario.isOwner)
+      this.getDatosPersonales(this.loginService.idDatosPersonales);
+    else
+      this.getDatosPersonales(this.loginService.idDatosPersonalesInv);
+
   }
   getDatosPersonales(idDatosPersonales: number): void{
     this.loginService.getDatosPersonales(idDatosPersonales)
@@ -278,7 +286,10 @@ export class LoginComponent implements OnInit {
         this.loginService.deleteToken();
         this.usuario = {id: 0, userName:"", password:"", isOwner: false};
         this.loginService.usuario = this.usuario;
-        this.loginService.idDatosPersonales = 0;
+        if(this.usuario.isOwner)
+          this.loginService.idDatosPersonales = 0;
+        else
+          this.loginService.idDatosPersonalesInv = 0;
         alert("Mensaje de api Usuario: "+data);
       }else{
         alert("Error: No se han obtenido los Datos.");
@@ -293,6 +304,8 @@ export class LoginComponent implements OnInit {
         return Form.INICIO;
       case 'Form.CUENTA':
         return Form.CUENTA;
+      case 'Form.AGREGA':
+        return Form.AGREGA;
       case 'Form.MODIFICA':
         return Form.MODIFICA;
       case 'Form.BAJA':

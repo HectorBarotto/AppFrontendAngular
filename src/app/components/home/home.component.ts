@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService} from '../../services/login.service';
 
 @Component({
@@ -11,11 +12,16 @@ export class HomeComponent implements OnInit {
   stylePerfil = "style-img-perfil-in-home";
   urlBanner!: string;
 
-  constructor(public loginService : LoginService) { 
+  constructor(private route: Router,
+    public loginService : LoginService) { 
   }
 
   ngOnInit(): void {
     this.urlBanner = this.loginService.datosPersonales.urlBanner;
+  }
+
+  editarUrlBanner(){
+    this.route.navigate(['edicion/Form.MODIFICA/Seccion.BANNER']);
   }
 
 }

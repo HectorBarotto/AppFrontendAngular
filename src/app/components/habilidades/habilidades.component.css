@@ -32,10 +32,16 @@
     content: counter(percentage) '%';
   }
   
-  div.skills{
+  .skills{
+    background-color: rgba(0, 0, 0, 0.277);
     border: solid thin black;
     border-radius:10px;
-    margin:3px;
+    padding: 5px;
+    margin: 5px;
     max-width: 90%;
+  }
+
+  .bi-trash{
+    margin-left: 10px;
   }
   /*fín habilidades*/

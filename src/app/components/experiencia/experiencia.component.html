@@ -1,51 +1,54 @@
-<div class="container-fluid seccion" *ngIf="loginService.getUserLogged()">
+<div class="container-fluid seccion " 
+    *ngIf="loginService.getUserLogged()">
     <div class="row">
         <div class="col-sm-11">
-          <h3>Experiencia</h3>
+          <h3>Experiencia Laboral</h3>
         </div>
-        <div class="col-sm-1">
-          <a href="#">
-            <i class="bi bi-plus-square" title="agregar"
-            *ngIf="loginService.modoEdicion"></i>
-          </a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <img class="small-img" src="../assets/images/desktop_development.png" alt="Desktop applications development">
-        </div>
-        <div class="col-sm-8">
-            <h3>Desktop Application Developer</h3>
-            <p>2005 - actualidad <br> Desarrollo independiente de aplicaciones para gestión comercial </p>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-            <i class="bi bi-pencil-square" title="editar"
-            *ngIf="loginService.modoEdicion"></i>
-            </a>
-            <a href="#">
-            <i class="bi bi-trash" title="eliminar"
-            *ngIf="loginService.modoEdicion"></i>
-            </a>
+        <div class="col-sm-1" *ngIf="loginService.modoEdicion">
+            <button type="button" class="bi bi-plus-square"
+                title="agregar" 
+                (click)="agrega()" id="btnAgregar">
+            </button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <img class="small-img" src="../assets/images/web_developer.png" alt="web_developer">
-        </div>
-        <div class="col-sm-8">
-            <h3>Full Stack Developer Jr. -future</h3>
-            <p>Actualmente haciendo los primeros pasos en el desarrollo web </p>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-            <i class="bi bi-pencil-square" title="editar"
-            *ngIf="loginService.modoEdicion"></i>
-            </a>
-            <a href="#">
-            <i class="bi bi-trash" title="eliminar"
-            *ngIf="loginService.modoEdicion"></i>
-            </a>
-        </div>
+
+    <div>
+        <ol *ngFor="let exp of experiencia"
+            style= "list-style-type: none;">
+            <li>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img class="small-img" src="{{ exp.urlLogo}}"
+                        onerror= "this.src='../assets/images/unimg.png'" 
+                        alt="{{exp.nombreEmpresa}}">
+                    </div>
+                    <div class="col-sm-8">
+                        <h3>{{exp.nombreEmpresa}}</h3>
+                        <span *ngIf="exp.fechaInicio != null">
+                            {{exp.fechaInicio | date:'yyyy'}}</span>
+                        <span *ngIf="exp.fechaInicio == null">
+                            Fecha Ingreso: sin datos</span>
+                        <span *ngIf="exp.fechaFin != null">
+                            - {{exp.fechaFin | date:'yyyy'}}
+                           <br>{{exp.descripcion}}</span>
+                        <span *ngIf="exp.fechaFin == null">
+                            - actualidad 
+                           <br>{{exp.descripcion}}</span>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="bi bi-pencil-square"
+                            title="modificar" 
+                            *ngIf="loginService.modoEdicion"
+                            (click)="modifica(exp.id)">
+                        </button>
+                        <button type="button" class="bi bi-trash mt-3"
+                            title="eliminar" 
+                            *ngIf="loginService.modoEdicion"
+                            (click)="elimina(exp.id)">
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ol>
     </div>
 </div>

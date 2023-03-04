@@ -2,9 +2,9 @@
 <header>
     <!-- banner-->
     <div id="banner-edit" *ngIf="loginService.modoEdicion"> <!-- [hidden]="loginService.mostrarIconos"   -->
-      <a href="#" >
-        <i class="bi bi-pencil-square" title="editar"></i>
-      </a>
+      <button type="button" class="bi bi-pencil-square"
+        title="Acceso de edición" (click)="editarUrlBanner()" id="btnEdicion">
+      </button>
     </div>
     <div class="card mat-card" id="first-card">
       <img class="img-fluid" 
@@ -19,6 +19,7 @@
 
 
 </header>
+
 <div *ngIf="loginService.getUserLogged()">
   <section>
     <app-acerca-de [styleInHome]="stylePerfil"></app-acerca-de>
@@ -39,7 +40,7 @@
   <section>
     <app-proyectos></app-proyectos>
   </section>
-  
+
   <aside> <!-- sección de contenido dinamico indirecto relacionado al documento-->
   </aside>
   

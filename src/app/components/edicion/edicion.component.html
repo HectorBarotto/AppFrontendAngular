@@ -1,0 +1,470 @@
+<section class="vh-100 gradient-custom">
+    <div class="container py-0">
+        <div class="row d-flex justify-content-center 
+        align-items-center h-100 mt-5 " >
+        <div class="col-12"> <!--class="col-12 col-md-8 col-lg-6 col-xl-5"-->
+            <div class="card bg-secondary text-white" style="border-radius: 1rem;">
+                <div class="card-body p-3">
+<!--Agrega nuevos datos-->
+                    <div class="mb-md-0 mt-md-0 pb-0"
+                        *ngIf="verForm == eForm.AGREGA">
+    <!-- ADD EXPERIENCIA LABORAL-->
+                        <div *ngIf="seccionIn == seccion.EXP_LABORAL">
+                            <h2 class="fw-bold mb-0 text-uppercase">Agrega Experiencia Laboral</h2>
+                            <div class="col-8 form-outline form-white mt-2">
+                                <label class="form-label">Nombre de la Empresa:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 45 caracteres" 
+                                    minlength="5" maxlength="45"
+                                    [(ngModel)]="experiencia.nombreEmpresa" required/>
+                                <label class="form-label mt-2">Cargo ó Puesto que ocupa:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 45 caracteres" 
+                                    minlength="5" maxlength="45"
+                                    [(ngModel)]="experiencia.puesto"/>
+                                <label class="form-label mt-3 mb-3">Es su Trabajo Actual? -->[
+                                    <input type="checkbox" [(ngModel)]="experiencia.isTrabajoActual" /> 
+                                ]</label>
+                                <label class="form-label">Fecha de ingreso:
+                                    <input type=date name=fechaInicio
+                                    [(ngModel)]="experiencia.fechaInicio" required/>
+                                </label>
+                                <label *ngIf="!experiencia.isTrabajoActual" class="form-label">Fecha de cese&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                                    <input type=date name=fechaFin
+                                    [(ngModel)]="experiencia.fechaFin"/>
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label mt-2">Breve descripción del desempeño en el cargo/puesto:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 200 caracteres" 
+                                    minlength="5" maxlength="200"
+                                    [(ngModel)]="experiencia.descripcion"/>
+                                <label class="form-label mt-2">Ubicación de Imágen a mostrar (Url Logo):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="experiencia.urlLogo"/>
+                            </div>
+                        </div>
+    <!-- ADD EDUCACION--> 
+                        <div *ngIf="seccionIn == seccion.EDUCACION">
+                            <h2 class="fw-bold mb-0 text-uppercase">Agrega Formación / Estudio</h2>
+                            <div class="col-8 form-outline form-white mt-2">
+                                <label class="form-label">Nombre de la Institución:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="educacion.institucion" required/>
+                                <label class="form-label mt-2">Título:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="educacion.titulo"/>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label mt-2">Breve descripción del estudio:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 200 caracteres" 
+                                    minlength="5" maxlength="200"
+                                    [(ngModel)]="educacion.descripcion"/>
+                            </div> 
+                            <div class="col-6 mt-3">
+                                <label class="form-label">Fecha de ingreso:
+                                    <input type=date name=fechaInicio
+                                    [(ngModel)]="educacion.fechaInicio" required/>
+                                </label>
+                                <label class="form-label">Fecha de egreso&nbsp;:
+                                    <input type=date name=fechaFin
+                                    [(ngModel)]="educacion.fechaFin"/>
+                                </label>
+                            </div>  
+                            <div class="col-12">
+                                <label class="form-label mt-2">Ubicación de Imágen a mostrar (Url Logo):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="educacion.urlLogo"/>
+                            </div>
+                        </div>
+    <!-- ADD HABILIDAD--> 
+                        <div *ngIf="seccionIn == seccion.HABILIDADES">
+                            <h2 class="fw-bold mb-0 text-uppercase">Agrega Habilidad en su desempeño</h2>
+                            <div class="col-12">
+                                <label class="form-label mt-2">Breve descripción de habilidad adquirida:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 150 caracteres" 
+                                    minlength="5" maxlength="150"
+                                    [(ngModel)]="habilidad.descripcion"/>
+                            </div> 
+                            <div class="mt-3">
+                                <label class="form-label">Nivel estimado (porcentaje 0-100) :
+                                    <input type="number" name="nivel"
+                                    min="0" max="100"
+                                    [(ngModel)]="habilidad.nivel" required/>
+                                </label>
+                            </div>  
+                        </div>  
+    <!-- ADD PROYECTOS--> 
+                        <div *ngIf="seccionIn == seccion.PROYECTOS">
+                            <h2 class="fw-bold mb-0 text-uppercase">Agrega Proyecto</h2>
+                            <div class="col-12 form-outline form-white mt-2">
+                                <label class="form-label">Nombre del Proyecto:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 50 caracteres" 
+                                    minlength="5" maxlength="50"
+                                    [(ngModel)]="proyecto.proyecto" required/>
+                                <label class="form-label mt-2">Breve descripción del proyecto:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 200 caracteres" 
+                                    minlength="5" maxlength="200"
+                                    [(ngModel)]="proyecto.descripcion"/>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <label class="form-label">Fecha de comienzo&nbsp;&nbsp;&nbsp;:
+                                    <input type=date name=fechaInicio
+                                    [(ngModel)]="proyecto.fechaInicio"/>
+                                </label>
+                                <label class="form-label">Fecha de finalización :
+                                    <input type=date name=fechaFin
+                                    [(ngModel)]="proyecto.fechaFin"/>
+                                </label>
+                            </div>  
+                            <div class="col-12">
+                                <label class="form-label mt-2">Ubicación del proyecto (Url Proyecto):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="proyecto.url"/>
+                                <label class="form-label mt-2">Ubicación de Imágen a mostrar (Url Logo):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="proyecto.urlLogo"/>
+                            </div>
+                        </div>                                              
+    <!-- ADD FORM FOOTER-->                  
+                        <div class="row d-flex justify-content-center mt-4">
+                            <div class="col">
+                                <button class="btn btn-outline-light btn-lg px-5 mb-4 " 
+                                    type="submit" (click)="cancelarEdicion()"
+                                    >Cancelar
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-light btn-lg px-5 mb-4" 
+                                    type="submit" (click)="agregar()"
+                                    >Agregar Datos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+<!--Edición de datos-->
+    <!--Edición de Datos Personales -->
+                    <div class="mb-md-0 mt-md-0 pb-0"
+                        *ngIf="verForm == eForm.MODIFICA"> 
+
+                        <h2 class="fw-bold mb-0 text-uppercase">Modo Edición de Datos</h2>
+                        <p class="text-white">
+                            Permite hacer modificaciones en los datos e imágenes del portfolio </p>  
+
+                        <div class="col-12 form-outline form-white mb-0 col-6"
+                            *ngIf="seccionIn == seccion.BANNER">
+                            <label class="form-label">Ubicación (Url) Imágen de Banner:</label>
+                            <input type="text" class="form-control form-control-md" 
+                            placeholder="" minlength="5" maxlength="100"
+                            [(ngModel)]= "urlBanner"/>
+                        </div>
+                        <div class="col-12 form-outline form-white mb-0 col-6"
+                            *ngIf="seccionIn == seccion.PERFIL">
+                            <label class="form-label">Ubicación (Url) Imágen de Perfil:</label>
+                            <input type="text" class="form-control form-control-md" 
+                            placeholder="" minlength="5" maxlength="100"
+                            [(ngModel)]= "urlPerfil"/>
+                        </div>
+                        <div class="col-12 form-outline form-white mb-0 col-6"
+                            *ngIf="seccionIn == seccion.ACERCA_DE">
+                            <label class="form-label">Breve reseña a mostrar en la sección Acerca de:</label>
+                            <input type="text" class="form-control form-control-md" 
+                            placeholder="máximo: 200 caracteres" minlength="5" maxlength="200"
+                            [(ngModel)]= "sobreMi"/>
+                        </div>                        
+    <!--Edición de Experiencia Laboral -->
+                        <div *ngIf="seccionIn == seccion.EXP_LABORAL">
+                            <h3>Experiencia Laboral </h3>  
+                            <div class="col-8 form-outline form-white mt-2">
+                                <label class="form-label">Nombre de la Empresa:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 45 caracteres" 
+                                    minlength="5" maxlength="45"
+                                    [(ngModel)]="experiencia.nombreEmpresa" required/>
+                                <label class="form-label mt-2">Cargo ó Puesto que ocupa:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 45 caracteres" 
+                                    minlength="5" maxlength="45"
+                                    [(ngModel)]="experiencia.puesto"/>
+                                <label class="form-label mt-3 mb-3">Es su Trabajo Actual? -->[
+                                    <input type="checkbox" [(ngModel)]="experiencia.isTrabajoActual" /> 
+                                ]</label>
+                                <label class="form-label">Fecha de ingreso:
+                                    <input type=date name=fechaInicio
+                                    [(ngModel)]="experiencia.fechaInicio" required/>
+                                </label>
+                                <label *ngIf="!experiencia.isTrabajoActual" class="form-label">Fecha de cese&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                                    <input type=date name=fechaFin
+                                    [(ngModel)]="experiencia.fechaFin"/>
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label mt-2">Breve descripción del desempeño en el cargo/puesto:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 200 caracteres" 
+                                    minlength="5" maxlength="200"
+                                    [(ngModel)]="experiencia.descripcion"/>
+                                <label class="form-label mt-2">Ubicación de Imágen a mostrar (Url Logo):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="experiencia.urlLogo"/>
+                            </div>  
+                        </div>  
+    <!--Edición de Educación -->
+                        <div *ngIf="seccionIn == seccion.EDUCACION">
+                            <h3>Educación </h3>  
+                            <div class="col-8 form-outline form-white mt-2">
+                                <label class="form-label">Nombre de la Institución:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="educacion.institucion" required/>
+                                <label class="form-label mt-2">Título:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="educacion.titulo"/>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label mt-2">Breve descripción del estudio:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 200 caracteres" 
+                                    minlength="5" maxlength="200"
+                                    [(ngModel)]="educacion.descripcion"/>
+                            </div> 
+                            <div class="col-6 mt-3">
+                                <label class="form-label">Fecha de ingreso:
+                                    <input type=date name=fechaInicio
+                                    [(ngModel)]="educacion.fechaInicio" required/>
+                                </label>
+                                <label class="form-label">Fecha de egreso&nbsp;:
+                                    <input type=date name=fechaFin
+                                    [(ngModel)]="educacion.fechaFin"/>
+                                </label>
+                            </div>  
+                            <div class="col-12">
+                                <label class="form-label mt-2">Ubicación de Imágen a mostrar (Url Logo):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="educacion.urlLogo"/>
+                            </div>
+                        </div>           
+    <!--Edición de Habilidades -->
+                        <div *ngIf="seccionIn == seccion.HABILIDADES">
+                            <h3>Modifica Habilidad </h3>  
+                            <div class="col-12">
+                                <label class="form-label mt-2">Breve descripción de habilidad adquirida:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 150 caracteres" 
+                                    minlength="5" maxlength="150"
+                                    [(ngModel)]="habilidad.descripcion"/>
+                            </div> 
+                            <div class="mt-3">
+                                <label class="form-label">Nivel estimado (porcentaje 0-100) :
+                                    <input type="number" name="nivel"
+                                    min="0" max="100"
+                                    [(ngModel)]="habilidad.nivel" required/>
+                                </label>
+                            </div>  
+                        </div>
+    <!--Edición de Proyectos -->
+                        <div *ngIf="seccionIn == seccion.PROYECTOS">
+                            <h2 class="fw-bold mb-0 text-uppercase">Modifica Proyecto</h2>
+                            <div class="col-12 form-outline form-white mt-2">
+                                <label class="form-label">Nombre del Proyecto:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 50 caracteres" 
+                                    minlength="5" maxlength="50"
+                                    [(ngModel)]="proyecto.proyecto" required/>
+                                <label class="form-label mt-2">Breve descripción del proyecto:</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 200 caracteres" 
+                                    minlength="5" maxlength="200"
+                                    [(ngModel)]="proyecto.descripcion"/>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <label class="form-label">Fecha de comienzo&nbsp;&nbsp;&nbsp;:
+                                    <input type=date name=fechaInicio
+                                    [(ngModel)]="proyecto.fechaInicio"/>
+                                </label>
+                                <label class="form-label">Fecha de finalización :
+                                    <input type=date name=fechaFin
+                                    [(ngModel)]="proyecto.fechaFin"/>
+                                </label>
+                            </div>  
+                            <div class="col-12">
+                                <label class="form-label mt-2">Ubicación del proyecto (Url Proyecto):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="proyecto.url"/>
+                                <label class="form-label mt-2">Ubicación de Imágen a mostrar (Url Logo):</label>
+                                <input type="text" class="form-control form-control-md" 
+                                    placeholder="máximo: 100 caracteres" 
+                                    minlength="5" maxlength="100"
+                                    [(ngModel)]="proyecto.urlLogo"/>
+                            </div>
+                        </div>
+<!-- EDIT FORM FOOTER-->
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <button class="btn btn-outline-light btn-lg px-5 mt-4 mb-4 " 
+                                    type="submit" (click)="cancelarEdicion()"
+                                    >Cancelar
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-light btn-lg px-5 mt-4 mb-4" 
+                                    type="submit" (click)="modificar()"
+                                    >Modificar Datos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+<!--Eliminar datos-->                    
+                    <div class="mb-md-0 mt-md-0 pb-0" *ngIf="verForm == eForm.BAJA">
+                        <h2 class="fw-bold mb-0 text-uppercase">Elimina Datos</h2>
+    <!--Eliminar un item de Experiencia Laboral -->
+                        <div *ngIf="seccionIn == seccion.EXP_LABORAL">
+                            <span>Permite eliminar un Item de :&nbsp;&nbsp;</span>
+                            <h3 class="text-black" style="display:inline;">
+                                Experiencia Laboral</h3>
+
+                            <div class="col-12 form-outline form-white mt-2">
+                                <label class="form-label row">Nombre de la Empresa :
+                                [ {{experiencia.nombreEmpresa}} ]
+                                </label>
+                                <label class="form-label row mt-2">Cargo ó Puesto que ocupa :
+                                [ {{experiencia.puesto}}  ]
+                                </label>
+                                <label class="form-label row" >
+                                    Fecha de ingreso : {{fechaI}}
+                                </label>
+                                <label class="form-label row" *ngIf="experiencia.isTrabajoActual"
+                                    type="checkbox=true">Es trabajo actual.
+                                </label>
+                                <label *ngIf="!experiencia.isTrabajoActual">
+                                    Fecha de Cese : {{fechaF}}
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label row mt-2">Breve descripción del desempeño en el cargo/puesto :</label>
+                                <label class="form-label row mt-2">[ {{experiencia.descripcion}} ]</label>
+                                <label class="form-label row mt-2">Ubicación de Imágen a mostrar (Url Logo) :</label>
+                                <label class="form-label row mt-2">[ {{experiencia.urlLogo}} ]</label>
+                            </div>  
+                        </div> 
+    <!--Eliminar un item de Educación -->
+                        <div *ngIf="seccionIn == seccion.EDUCACION">
+                            <span>Permite eliminar un Item de :&nbsp;&nbsp;</span>
+                            <h3 class="text-black" style="display:inline;">
+                                Educación</h3>
+
+                            <div class="col-12 form-outline form-white mt-2">
+                                <label class="form-label row">Nombre de la Institución :
+                                [ {{educacion.institucion}} ]
+                                </label>
+                                <label class="form-label row mt-2">Título :
+                                [ {{educacion.titulo}}  ]
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label row mt-2">Breve descripción de la formación / estudio :</label>
+                                <label class="form-label row mt-2">[ {{educacion.descripcion}} ]</label>
+                            </div>
+                            <div>
+                                <label class="form-label row" >
+                                    Fecha de ingreso : {{fechaI}}
+                                </label>
+                                <label>
+                                    Fecha de Cese : {{fechaF}}
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label row mt-2">Ubicación de Imágen a mostrar (Url Logo) :</label>
+                                <label class="form-label row mt-2">[ {{educacion.urlLogo}} ]</label>
+                            </div>  
+                        </div>      
+    <!--Eliminar un item de Habilidades -->
+                        <div *ngIf="seccionIn == seccion.HABILIDADES">
+                            <span>Permite eliminar un Item de :&nbsp;&nbsp;</span>
+                            <h3 class="text-black" style="display:inline;">
+                                Habilidades</h3>
+
+                            <div class="col-12 form-outline form-white mt-2">
+                                <label class="form-label row">Descripción de habilidad :
+                                [ {{habilidad.descripcion}} ]
+                                </label>
+                                <label class="form-label row mt-2">Nivel :
+                                [ {{habilidad.nivel}}  ] %
+                                </label>
+                            </div>
+                        </div>
+    <!--Eliminar un item de Proyectos -->
+                        <div *ngIf="seccionIn == seccion.PROYECTOS">
+                            <span>Permite eliminar un Item de :&nbsp;&nbsp;</span>
+                            <h3 class="text-black" style="display:inline;">
+                                Proyectos</h3>
+                            <div class="col-12 form-outline form-white mt-2">
+                                <label class="form-label row">Nombre del Proyecto :
+                                [ {{proyecto.proyecto}} ]
+                                </label>
+                                <label class="form-label row mt-2">Breve descripción del Proyecto :</label>
+                                <label class="form-label row mt-2">[ {{proyecto.descripcion}} ]</label>
+                            </div>
+                            <div>
+                                <label class="form-label row" >
+                                    Fecha de comienzo : {{fechaI}}
+                                </label>
+                                <label>
+                                    Fecha de finalización : {{fechaF}}
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label row mt-2">Ubicación del proyecto (Url Proyecto) :</label>
+                                <label class="form-label row mt-2">[ {{proyecto.url}} ]</label>
+                                <label class="form-label row mt-2">Ubicación de Imágen a mostrar (Url Logo) :</label>
+                                <label class="form-label row mt-2">[ {{proyecto.urlLogo}} ]</label>
+                            </div>  
+                        </div>  
+    <!-- DEL FORM FOOTER-->
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <button class="btn btn-outline-light btn-lg px-5 mt-4 mb-4 " 
+                                    type="submit" (click)="cancelarEdicion()"
+                                    >Cancelar
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-light btn-lg px-5 mt-4 mb-4" 
+                                    type="submit" (click)="eliminar()"
+                                    >Eliminar Datos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

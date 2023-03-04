@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { Router} from '@angular/router';
 
-//import { AppRoutingModule} from '../app-routing/app-routing.module';
+
 import { LoginService} from '../../services/login.service';
-import { Form } from '../../services/login.service'
+
 
 @Component({
   selector: 'app-navbar',

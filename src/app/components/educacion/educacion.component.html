@@ -1,73 +1,52 @@
-<div class="container-fluid seccion" *ngIf="loginService.getUserLogged()">
+<div class="container-fluid seccion" 
+    *ngIf="loginService.getUserLogged()">
     <div class="row">
         <div class="col-sm-11">
           <h3>Educación</h3>
         </div>
-        <div class="col-sm-1">
-          <a href="#">
-            <i class="bi bi-plus-square" title="agregar" 
-            *ngIf="loginService.modoEdicion"></i>
-          </a>
+        <div class="col-sm-1" *ngIf="loginService.modoEdicion">
+            <button type="button" class="bi bi-plus-square"
+                title="agregar" 
+                (click)="agrega()" id="btnAgregar">
+            </button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <img class="small-img" src="../assets/images/argprog_logo.png" alt="Full Stack Web Jr.">
-        </div>
-        <div class="col-sm-8">
-            <h3>Full Stack Web Jr.</h3>
-            <p>Cursando #Yo Programo </p>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-                <i class="bi bi-pencil-square" 
-                title="editar" 
-                *ngIf="loginService.modoEdicion"></i>
-            </a>
-            <a href="#">
-                <i class="bi bi-trash" title="eliminar"
-                *ngIf="loginService.modoEdicion"></i>
-            </a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <img class="small-img" src="../assets/images/111mil.png" alt="Desktop applications development">
-        </div>
-        <div class="col-sm-8">
-            <h3>Analista de Conocimiento-Dimensión Programador</h3>
-            <p>2019 - Curso certificado con desarrollos en Java y MySQL </p>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-                <i class="bi bi-pencil-square" 
-                title="editar" 
-                *ngIf="loginService.modoEdicion"></i>
-            </a>
-            <a href="#">
-                <i class="bi bi-trash" title="eliminar" 
-                *ngIf="loginService.modoEdicion"></i>
-            </a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <img class="small-img" src="../assets/images/inst20.png" alt="Instituto nº20 Junín">
-        </div>
-        <div class="col-sm-8">
-            <h3>Técnico Superior Impositivo Contable</h3>
-            <p>1980 - 1982 Estudio de nivel terciario sobre finanzas,
-            <br>costos, administración e impuestos </p>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-                <i class="bi bi-pencil-square" title="editar"
-                *ngIf="loginService.modoEdicion"></i>
-            </a>
-            <a href="#">
-                <i class="bi bi-trash" title="eliminar"
-                *ngIf="loginService.modoEdicion"></i>
-            </a>
-        </div>
+
+    <div>
+        <ol *ngFor="let edu of educacion"
+            style= "list-style-type: none;">
+            <li>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img class="small-img" src="{{ edu.urlLogo}}"
+                        onerror= "this.src='../assets/images/unimg.png'" 
+                        alt="{{edu.institucion}}">
+                    </div>
+                    <div class="col-sm-8">
+                        <h3>{{edu.titulo}}</h3>
+                        <span *ngIf="edu.fechaInicio != null">
+                            {{edu.fechaInicio | date:'yyyy'}} - </span>
+                        <span *ngIf="edu.fechaInicio == null">desde: sin datos - </span>
+                        <span *ngIf="edu.fechaFin != null">
+                            {{edu.fechaFin | date:'yyyy'}}
+                            <br> {{edu.descripcion}} </span>
+                        <span *ngIf="edu.fechaFin == null">hasta: sin datos 
+                            <br> {{edu.descripcion}} </span>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="bi bi-pencil-square"
+                            title="modificar" 
+                            *ngIf="loginService.modoEdicion"
+                            (click)="modifica(edu.id)">
+                        </button>
+                        <button type="button" class="bi bi-trash mt-3"
+                            title="eliminar" 
+                            *ngIf="loginService.modoEdicion"
+                            (click)="elimina(edu.id)">
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ol>
     </div>
 </div>

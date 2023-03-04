@@ -3,50 +3,50 @@
         <div class="col-sm-11">
           <h3>Proyectos</h3>
         </div>
-        <div class="col-sm-1">
-          <a href="#">
-            <i class="bi bi-plus-square" title="agregar"
-            *ngIf="loginService.modoEdicion"></i>
-          </a>
+        <div class="col-sm-1" *ngIf="loginService.modoEdicion">
+          <button type="button" class="bi bi-plus-square"
+              title="agregar" 
+              (click)="agrega()" id="btnAgregar">
+          </button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <img class="small-img" src="../assets/images/developer.png" alt="Desarrollo web">
-        </div>
-        <div class="col-sm-8">
-          <h3>Full Stack Web Jr.</h3>
-          <span>Argentina Programa -curso: #Yo Programo3 -desarrollo de portfolio web [2022]</span>
-          <span><a class="enlace-estilo" href="https://github.com/HectorBarotto" target="_blank">GitHub: portfolio</a></span>
-        </div>
-        <div class="col-sm-1">
-          <a href="#">
-            <i class="bi bi-pencil-square" title="editar"
-            *ngIf="loginService.modoEdicion"></i>
-          </a>
-          <a href="#">
-            <i class="bi bi-trash" title="eliminar"
-            *ngIf="loginService.modoEdicion"></i>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <img class="small-img" src="../assets/images/java.png" alt="Java app-desktop">
-        </div>
-        <div class="col-sm-8">
-          <h3>Java - MySql</h3>
-          <p>Desarrollo completo de gestión comercial [2019-2021] </p>
-        </div>
-        <div class="col-sm-1">
-          <a href="#">
-            <i class="bi bi-pencil-square" title="editar"
-            *ngIf="loginService.modoEdicion"></i>
-          </a>
-          <a href="#">
-            <i class="bi bi-trash" title="eliminar"
-            *ngIf="loginService.modoEdicion"></i>
-          </a>
-        </div>
-      </div>
+    </div>
+
+    <div>
+      <ol *ngFor="let proy of proyecto"
+          style= "list-style-type: none;">
+          <li>
+              <div class="row">
+                  <div class="col-sm-3">
+                      <img class="small-img" src="{{ proy.urlLogo}}"
+                      onerror= "this.src='../assets/images/unimg.png'" 
+                      alt="{{proy.proyecto}}">
+                  </div>
+                  <div class="col-sm-8">
+                    <h3>{{proy.proyecto}}</h3>
+                    <span *ngIf="proy.fechaInicio != null">
+                        {{proy.fechaInicio | date:'yyyy'}} - </span>
+                    <span *ngIf="proy.fechaInicio == null">desde: sin datos - </span>
+                    <span *ngIf="proy.fechaFin != null">
+                        {{proy.fechaFin | date:'yyyy'}}
+                        <br> {{proy.descripcion}} </span>
+                    <span *ngIf="proy.fechaFin == null">hasta: sin datos 
+                        <br> {{proy.descripcion}} </span>
+                    <span><a class="enlace-estilo" href="{{proy.url}}" target="_blank">{{proy.url}}</a></span>
+                  </div>
+                  <div class="col-sm-1">
+                    <button type="button" class="bi bi-pencil-square"
+                        title="modificar" 
+                        *ngIf="loginService.modoEdicion"
+                        (click)="modifica(proy.id)">
+                    </button>
+                    <button type="button" class="bi bi-trash mt-3"
+                        title="eliminar" 
+                        *ngIf="loginService.modoEdicion"
+                        (click)="elimina(proy.id)">
+                    </button>
+                  </div>
+              </div>
+          </li>
+      </ol>
+    </div>
 </div>

@@ -20,6 +20,7 @@ import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { EdicionComponent } from './components/edicion/edicion.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LoginComponent } from './components/login/login.component';
     ProyectosComponent,
     PageNotFoundComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    EdicionComponent
   ],
   imports: [
     BrowserModule,

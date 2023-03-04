@@ -3,28 +3,43 @@
         <img src="{{urlFoto}}"
             onerror="this.src='../assets/images/perfil.png'"
             class="rounded-circle {{styleInHome}} img-perfil"
-            title="image farm"
-            alt="mi perfil"/>
-        <a href="#">
-            <i class="bi bi-pencil-square" title="editar" 
-            *ngIf="loginService.modoEdicion"></i>
-        </a>
+            title="imágen de perfil"
+            alt="mi foto de perfil"/>
+
+        <button type="button" class="bi bi-pencil-square"
+            style="margin: 10px;"
+            *ngIf="loginService.modoEdicion"
+            title="Acceso de edición" 
+            (click)="editar($event)" id="btnUrlPerfil">
+        </button>
+        <h3 class="px-3" style="display:inline;">{{loginService.datosPersonales.nombre +" "+
+            loginService.datosPersonales.apellido}}</h3>
     </div>
+    <!--Lista con al menos los últimos dos títulos de estudios cursados-->
     <div id="contenedor-Info">
         <div>
-            <h3>Héctor M. Barotto</h3>
-            <ul type="circle">
-                <li>Informático</li>
-                <li>Técnico Impositivo Contable</li>
+            <ul *ngFor="let titulo of titulos"
+                type="circle">
+                <li>
+                    <div class="row">
+                        <div class="col-sm-8">
+                           <h5>{{titulo}}</h5> 
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
         <div>
-            <img src="../assets/images/inst20.png"  class="small-img" alt="Intituto ISFDyT Nº20S">
-            <h5>Instituto Superior de Formación <br> Docente y Técnica nº20 JUNIN(B)</h5>
+            <img src="{{ultInst.urlLogo}}" 
+                onerror="this.src='../assets/images/unimg.png'" 
+                class="small-img"
+                title="{{ultInst.institucion}}" 
+                alt="{{ultInst.institucion}}">
+            <h5>{{ultInst.institucion}}</h5>
         </div>
     </div>
     <div id="info-contact">
-        <span>JUNIN(Pcia.BsAs-Argentina) </span>
+        <span>{{loginService.datosPersonales.domicilio}} </span>
         <span><a class="enlace-estilo" href="#">Información de contacto</a></span>
     </div>
     
@@ -32,13 +47,14 @@
         <div class="row">
             <div class="col-sm-11">
             <h3>Acerca de</h3>
-            <div><p>Técnico impositivo-contable con desarrollos en c#, Java, MySQL</p></div>
+            <div><p>{{loginService.datosPersonales.sobreMi}}</p></div>
         </div>
         <div class="col-sm-1">
-            <a href="#">
-                <i class="bi bi-pencil-square" title="editar" 
-                *ngIf="loginService.modoEdicion"></i>
-            </a>
+            <button type="button" class="bi bi-pencil-square"
+                *ngIf="loginService.modoEdicion"
+                title="Acceso de edición" 
+                (click)="editar($event)" id="btnSobreMi">
+            </button>
         </div>
     </div>
 </div>
