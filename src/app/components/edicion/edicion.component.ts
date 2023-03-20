@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { LoginService} from '../../services/login.service';
 import { EdicionService } from 'src/app/services/edicion.service';
 import { Form } from '../../services/login.service';
-import { Seccion } from 'src/app/services/edicion.service';
+import { Seccion } from '../../services/edicion.service';
 
 @Component({
   selector: 'app-edicion',
@@ -81,12 +81,12 @@ export class EdicionComponent implements OnInit {
                   //fecha a mostrar invertida(dd/mm/aaaa) si el dato es no null
                   if(this.experiencia.fechaInicio != null){
                     this.fechaI = this.experiencia.fechaInicio;
-                    this.fechaI = this.fechaI.split(" ")[0].split("-").reverse().join("/");
+                    //this.fechaI = this.fechaI.split(" ")[0].split("-").reverse().join("/");
                   }else
                     this.fechaI = "";
                   if(this.experiencia.fechaFin != null){
                     this.fechaF = this.experiencia.fechaFin;
-                    this.fechaF = this.fechaF.split(" ")[0].split("-").reverse().join("/");
+                    //this.fechaF = this.fechaF.split(" ")[0].split("-").reverse().join("/");
                   }else
                     this.fechaF = "";
                 }else{
@@ -111,12 +111,12 @@ export class EdicionComponent implements OnInit {
                   //fecha a mostrar invertida(dd/mm/aaaa) si el dato es no null
                   if(this.educacion.fechaInicio != null){
                     this.fechaI = this.educacion.fechaInicio;
-                    this.fechaI = this.fechaI.split(" ")[0].split("-").reverse().join("/");
+                    //this.fechaI = this.fechaI.split(" ")[0].split("-").reverse().join("/");
                   }else
                     this.fechaI = "";
                   if(this.educacion.fechaFin != null){
                     this.fechaF = this.educacion.fechaFin;
-                    this.fechaF = this.fechaF.split(" ")[0].split("-").reverse().join("/");
+                    //this.fechaF = this.fechaF.split(" ")[0].split("-").reverse().join("/");
                   }else
                     this.fechaF = "";
                 }else{
@@ -159,12 +159,12 @@ export class EdicionComponent implements OnInit {
                   //fecha a mostrar invertida(dd/mm/aaaa) si el dato es no null
                   if(this.proyecto.fechaInicio != null){
                     this.fechaI = this.proyecto.fechaInicio;
-                    this.fechaI = this.fechaI.split(" ")[0].split("-").reverse().join("/");
+                    //this.fechaI = this.fechaI.split(" ")[0].split("-").reverse().join("/");
                   }else
                     this.fechaI = "";
                   if(this.proyecto.fechaFin != null){
                     this.fechaF = this.proyecto.fechaFin;
-                    this.fechaF = this.fechaF.split(" ")[0].split("-").reverse().join("/");
+                    //this.fechaF = this.fechaF.split(" ")[0].split("-").reverse().join("/");
                   }else
                     this.fechaF = "";
                 }else{
@@ -637,7 +637,7 @@ modificar(){
     if(this.seccionIn === Seccion.BANNER || 
         this.seccionIn === Seccion.PERFIL || 
         this.seccionIn === Seccion.ACERCA_DE){
-
+      /*
       if(!this.datosPersonalesModificados(
             this.urlBanner, this.loginService.urlBanner_bak) 
           || !this.datosPersonalesModificados(
@@ -646,6 +646,7 @@ modificar(){
             this.sobreMi, this.sobreMi_bak)
         )
         return;
+      */  
       if(this.loginService.datosPersonales.id > 0){
         switch(this.seccionIn){
           case Seccion.BANNER:{
@@ -680,7 +681,7 @@ modificar(){
 
   //true: Los Datos Personales han cambiado
   datosPersonalesModificados(datoActual: string, datoAnterior: string):boolean{
-    if(datoActual === datoAnterior){
+    if(datoActual == datoAnterior){
       console.log('Datos Personales SIN Cambios.');
       this.route.navigate(['']);
       return false;
@@ -835,5 +836,34 @@ modificar(){
         return Form.BAJA;
     }
     return -1;
+  }
+
+  //Al no funcionar split() en deploy web lo resuelvo en forma casera
+  fecha(unaFecha: string):string{
+    let res : string[] = [];
+    let n = 0;
+    let s: string = "", c: string= "";
+    for(var i=0; i++; i<unaFecha.length){
+      if(unaFecha.charAt(i) !== ','){
+        s = s.concat(unaFecha.charAt(i));
+      }
+      else{
+        if(n == 0){
+          res[n] = s;
+          s = "";
+        }
+        if(n == 1){
+          res[n] = s;
+          s = "";
+        }
+        n++;
+      }
+      if( n == 2 && i == unaFecha.length-1){
+        res[n] = s;
+      } 
+      
+    }
+    c = res[2]+'-'+res[1]+'-'+res[0];
+    return c;
   }
 }

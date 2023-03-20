@@ -9,7 +9,7 @@ export enum Seccion{'BANNER', 'PERFIL', 'ACERCA_DE',
   providedIn: 'root'
 })
 export class EdicionService {
-  private url = "/api/";
+  private url = "https://portfolio-sb.onrender.com/api/";
 
   constructor(private http: HttpClient) { }
 
@@ -21,11 +21,11 @@ export class EdicionService {
     return this.http.get(this.url+"experiencialaboral/traer/"+ id);
   }
   addExpLaboral(expLaboral: any): Observable<any> {
-    return this.http.post(this.url+"experiencialaboral/agregar",
+    return this.http.post(this.url+"experiencialaboral/agregar/",
       expLaboral, {responseType: 'text'});
   }
   editExpLaboral(expLaboral: any): Observable<any> {
-    return this.http.put(this.url+"experiencialaboral/editar",expLaboral);
+    return this.http.put(this.url+"experiencialaboral/editar/",expLaboral);
   }
   delExpLaboral(id:number): Observable<any> {
     return this.http.delete(this.url+"experiencialaboral/borrar/"+ id,
@@ -39,11 +39,11 @@ getEducacion(id:number): Observable<any> {
   return this.http.get(this.url+"educacion/traer/"+ id);
 }
 addEducacion(educacion: any): Observable<any> {
-  return this.http.post(this.url+"educacion/agregar",
+  return this.http.post(this.url+"educacion/agregar/",
     educacion, {responseType: 'text'});
 }
 editEducacion(educacion: any): Observable<any> {
-  return this.http.put(this.url+"educacion/editar",educacion);
+  return this.http.put(this.url+"educacion/editar/",educacion);
 }
 delEducacion(id:number): Observable<any> {
   return this.http.delete(this.url+"educacion/borrar/"+ id,
@@ -57,11 +57,11 @@ getHabilidad(id:number): Observable<any> {
   return this.http.get(this.url+"habilidades/traer/"+ id);
 }
 addHabilidad(habilidad: any): Observable<any> {
-  return this.http.post(this.url+"habilidades/agregar",
+  return this.http.post(this.url+"habilidades/agregar/",
     habilidad, {responseType: 'text'});
 }
 editHabilidad(habilidad: any): Observable<any> {
-  return this.http.put(this.url+"habilidades/editar",habilidad);
+  return this.http.put(this.url+"habilidades/editar/",habilidad);
 }
 delHabilidad(id:number): Observable<any> {
   return this.http.delete(this.url+"habilidades/borrar/"+ id,
@@ -75,11 +75,11 @@ getProyecto(id:number): Observable<any> {
   return this.http.get(this.url+"proyecto/traer/"+ id);
 }
 addProyecto(proyecto: any): Observable<any> {
-  return this.http.post(this.url+"proyecto/agregar",
+  return this.http.post(this.url+"proyecto/agregar/",
   proyecto, {responseType: 'text'});
 }
 editProyecto(proyecto: any): Observable<any> {
-  return this.http.put(this.url+"proyecto/editar",proyecto);
+  return this.http.put(this.url+"proyecto/editar/",proyecto);
 }
 delProyecto(id:number): Observable<any> {
   return this.http.delete(this.url+"proyecto/borrar/"+ id,

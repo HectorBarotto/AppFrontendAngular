@@ -11,7 +11,7 @@ export enum Form{'INICIO', 'CUENTA', 'AGREGA', 'MODIFICA', 'BAJA'};
 })
 export class LoginService {
 
-  private url = "/api/";
+  private url = "https://portfolio-sb.onrender.com/api/";
   private _modoEdicion = false;
   private _usuario = {id: 0, userName:"", password:"", isOwner:false};
   //Datos personales del propietario
@@ -61,7 +61,7 @@ login(user: any): Observable<any> {
     return this.getToken().trim().length > 0;
   }
   nuevoUsuario(user: any): Observable<any> {
-    return this.http.post(this.url+"usuario/agregar",user,
+    return this.http.post(this.url+"usuario/agregar/",user,
     {responseType: 'text'});
   }
   editUsuario(datos: any): Observable<any> {
@@ -75,7 +75,7 @@ login(user: any): Observable<any> {
     return this.http.get(this.url+"datospersonales/traer/"+ id);
   }
   nuevosDatosPersonales(datos: any): Observable<any> {
-    return this.http.post(this.url+"datospersonales/agregar",datos,
+    return this.http.post(this.url+"datospersonales/agregar/",datos,
     {responseType: 'text'});
   }
   listaDatosPersonales(): Observable<any> {

@@ -65,6 +65,11 @@ export class LoginComponent implements OnInit {
   }
 
   iniciarSesion() {
+    if (!confirm("El acceso a datos puede demorar ....\n"
+      +"Espera hasta máx. 4 min. ?")) {
+        this.route.navigate(['']);
+        return;
+    }
     this.loginService.modoEdicion = false;
 
     if(this.validarUsuario(this.usuario.userName.trim())
@@ -178,7 +183,23 @@ export class LoginComponent implements OnInit {
                 this.usuario.id = data;
                 this.datos.idUsuarioFK = data;
                 
-                this.loginService.nuevosDatosPersonales(this.datos).subscribe( data => {
+                this.loginService.nuevosDatosPersonales(this.datos)
+                  .subscribe( 
+                    {  next: data => {
+                      if (data != null) {
+                        console.log("Respuesta de api: "+ data);
+                      }else{
+                        console.log("Error!! datos personales nulos");
+                      }
+                    }, 
+                    error: err  => {
+                      if(err.status === 504)
+                        alert("Error 504: El servicio api rest no responde");
+                    },
+                    complete: () => console.log('Observer: Operación terminada.')
+                    });
+                  /*
+                  .subscribe( data => {
                   
                   if (data != null) {
                     alert("Respuesta de api: "+ data);
@@ -191,10 +212,8 @@ export class LoginComponent implements OnInit {
                       this.loginerror = "Error!! datos personales nulos";
                       console.log("login datos personales error: "+ this.loginerror);
                     }
-                  }/*,(error) => {
-                    console.log("error: "+ error.message);
-                              
-                }*/);
+                  });
+                  */
               }else{
                 this.loginerror = "Error!! datos usuario nulos";
                 console.log("login usuario error: "+ this.loginerror);
@@ -231,9 +250,11 @@ export class LoginComponent implements OnInit {
       if(this.datos.nombre.trim().length >= 2 && 
         this.datos.apellido.trim().length >= 2){
 
+        //  this.loginService.nuevosDatosPersonales(this.datos)
         this.loginService.editDatosPersonales(this.datos)
         .subscribe( data => {
           if(data != null){
+            this.loginService.datosPersonales = this.datos;
             alert("Modificación de Datos Guardada.");
             this.editarDatos = false;
             this.route.navigate(['']);
