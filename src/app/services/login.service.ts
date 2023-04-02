@@ -28,6 +28,9 @@ export class LoginService {
   private _urlFoto_bak!: string;
   private _urlBanner_bak!: string;
 
+  private _backendConn : boolean = false;
+  private _verPortfolio: boolean = false;
+
   constructor(private http: HttpClient , 
     private cookies: CookieService) {}
 
@@ -84,7 +87,10 @@ login(user: any): Observable<any> {
   editDatosPersonales(datos: any): Observable<any> {
     return this.http.put(this.url+"datospersonales/editar/",datos);
   }
-
+  borrarDatosPersonales(id:number): Observable<any> {
+    return this.http.delete(this.url+"datospersonales/borrar/"+ id,
+    {responseType: 'text'});
+  }
   setToken(token: string){
     this.cookies.set("token", token);
   }
@@ -151,4 +157,18 @@ public set idDatosPersonalesInv(id){
     this._modoEdicion = value;
   }
 
+  //Control de conexión a backend online (render - clever cloud)
+  public get backendConn():boolean{
+    return this._backendConn;
+  }
+  public set backendConn(value:boolean){
+    this._backendConn = value;
+  }
+  //Control de ingreso a portfolio sin login
+  public get verPortfolio():boolean{
+    return this._verPortfolio;
+  }
+  public set verPortfolio(value:boolean){
+    this._verPortfolio = value;
+  }
 }

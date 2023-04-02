@@ -11,7 +11,7 @@ import { PageNotFoundComponent } from '../components/page-not-found/page-not-fou
 import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
 import { EdicionComponent } from '../components/edicion/edicion.component';
-
+import { ContactoDatosComponent } from '../components/contacto-datos/contacto-datos.component';
 
 const routes: Routes = [{path: '', component: HomeComponent},
 {path: 'acerca-de', component: AcercaDeComponent},
@@ -22,6 +22,8 @@ const routes: Routes = [{path: '', component: HomeComponent},
 {path: 'login/:eForm', component: LoginComponent},
 {path: 'edicion/:eForm/:seccion', component: EdicionComponent},
 {path: 'edicion/:eForm/:seccion/:idElement', component: EdicionComponent},
+{path: 'contacto-datos', component: ContactoDatosComponent},
+{path: 'contacto-datos/:verSeccion', component: ContactoDatosComponent},
 {path: '**', component: PageNotFoundComponent}];
 
 

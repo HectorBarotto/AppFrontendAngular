@@ -1,0 +1,122 @@
+<div class="container-fluid seccion" 
+        *ngIf="loginService.getUserLogged() 
+        && !loginService.modoEdicion">
+    <div class="row">
+        <div class="col-sm-11">
+            <h3>Ingreso de Datos para Contacto</h3>
+        </div>
+    </div>   
+    <div *ngIf="!this.datosGuardados">
+        <div class="row form-outline form-white">
+            <div class="col-sm-8 mb-0 ">
+                <label class="form-label">Nombre:</label>
+                <input type="text" class="form-control form-control-sm" 
+                    placeholder="su nombre" minlength="3" maxlength="45"
+                    [(ngModel)]= "datos.nombre" required/>
+            </div>
+            <div class="col-sm-4 mb-0">
+                <label class="form-label">Telefono:</label>
+                <input type="text" class="form-control form-control-sm" 
+                placeholder="su número" minlength="5" maxlength="15"
+                [(ngModel)]= "datos.telefono"/>
+            </div>
+        </div>   
+        <div class="row">
+            <div class="col-sm-10 mb-0 ">
+                <label class="form-label">Email:</label>
+                <input type="email" class="form-control form-control-sm" 
+                placeholder="un correo" minlength="5" maxlength="100"
+                [(ngModel)]= "datos.email"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-11 mb-0 ">
+                <label class="form-label">Breve comentario acerca de su interés de contacto:</label>
+                <textarea name="comentarios" rows="3" cols="60"
+                    class="form-control form-control-sm"
+                    placeholder="comentario" minlength="5" maxlength="200"    
+                    [(ngModel)]= "datos.sobreMi"></textarea> <br>
+            </div>
+        </div>    
+        <div class="row" >
+            <div class="col-sm-12" style="display: flex; justify-content: center;">
+                <button class="btn btn-outline-light 
+                        btn-lg bg-secondary px-5 mb-2" 
+                    type="submit"
+                    (click)="guardarDatos()" 
+                    >Enviar</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="this.datosGuardados">
+        <div class="row">
+            <h5 class="col-sm-12 form-label mt-5 mb-5"
+                style="display: flex; justify-content: center;">
+                Datos enviados, en breve será contactado. <br>
+                Muchas Gracias!
+            </h5>
+        </div>
+        <div class="row" *ngIf="this.verBtnVolver">
+            <div class="col-sm-12" style="display: flex; justify-content: center;">
+                <button class="btn btn-outline-light 
+                        btn-lg bg-secondary px-5 mb-2" 
+                    type="submit"
+                    (click)="volver()" 
+                    >Volver</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid seccion" 
+    *ngIf="loginService.getUserLogged() 
+    && loginService.modoEdicion">
+
+    <div class="row">
+        <div class="col-sm-11">
+            <h3>Lista de Contactos</h3>
+        </div>
+    
+        <div *ngIf="listaDatos.length > 0">
+            <ol *ngFor="let dat of listaDatos"
+                    style= "list-style-type: none;">
+                <li>
+                    <div class="col-12 contacto">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Nombre: {{dat.nombre}}</p>
+                            </div>
+                            <div class="col-4">
+                                <p>Telefono: {{dat.telefono}}</p>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="bi bi-trash"
+                                    title="eliminar" 
+                                    *ngIf="loginService.modoEdicion"
+                                    (click)="eliminaDato(dat.id)">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11">
+                                <p>Email: {{dat.email}}</p>
+                                <p>Comentario: {{dat.sobreMi}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <div *ngIf="listaDatos.length < 1">
+            <h4>Lista de contactos vacía.</h4>
+        </div>
+        <div class="col-sm-12" 
+            style="display: flex; justify-content: center;"
+            *ngIf="this.verBtnVolver">
+            <button class="btn btn-outline-light 
+                    btn-lg bg-secondary px-5 mb-2" 
+                type="submit"
+                (click)="volver()" 
+                >Volver</button>
+        </div>
+    </div>
+</div>

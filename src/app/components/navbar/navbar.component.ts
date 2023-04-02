@@ -18,9 +18,23 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.deleteToken(); // No se toma en cuenta la memoria cache
+    this.loginService.verPortfolio = false;
+    //Para acortar tiempo de espera acceso a render(backend)
+    this.loginService.getDatosPersonales(1)
+      .subscribe( data => {
+      if(data != null){ //verifico no null para acceder a la propiedad
+        this.loginService.datosPersonales = data;
+        this.loginService.backendConn = true;
+        console.log('Acceso a backend establecido.');
+        this.router.navigate(['']);
+      }else{
+        console.log("Error: No se han obtenido datos en navbar-OnInit.");
+      }
+    });
   }
 
   login(): void {
+    this.loginService.verPortfolio = false;
     if(this.loginService.getUserLogged())
       this.cerrarSesion();
     else

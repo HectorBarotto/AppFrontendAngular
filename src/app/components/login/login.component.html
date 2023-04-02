@@ -142,8 +142,10 @@
           <div class="form-outline form-white col-4 mb-0">
             <label class="form-label">Fecha Nacimiento:</label>
             <input type="date" class="form-control form-control-sm" 
-            placeholder="dd-mm-aaaa" minlength="8" maxlength="10"
-            [(ngModel)]= "datos.fechaNac"/>
+              minlength="8" maxlength="10"
+              [ngModel]='datos.fechaNac | date:"yyyy-MM-dd" '
+              (ngModelChange)='datos.fechaNac=$event'
+            />
           </div>
           <div class="form-outline form-white mb-0">
             <label class="form-label">Sobre Mi:</label>

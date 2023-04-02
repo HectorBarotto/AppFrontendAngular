@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { EdicionComponent } from './components/edicion/edicion.component';
+import { ContactoDatosComponent } from './components/contacto-datos/contacto-datos.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EdicionComponent } from './components/edicion/edicion.component';
     PageNotFoundComponent,
     HomeComponent,
     LoginComponent,
-    EdicionComponent
+    EdicionComponent,
+    ContactoDatosComponent
   ],
   imports: [
     BrowserModule,

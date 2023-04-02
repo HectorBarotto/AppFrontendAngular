@@ -1,8 +1,10 @@
 <nav class="navbar navbar-collapse navbar-dark bg-secondary">
   <div class="container-fluid">
+    <!--
     <div class="navbar-brand" routerLink="" title="Si lo puedes imaginar, lo puedes programar">
       <img src="../assets/images/argprog.png" alt="logo argentina programa" align="left" width="238" height="49" />
     </div>
+    -->
     <div class="social-bar">
       <a href="https://www.facebook.com/" class="icon icon-facebook" target="_blank" title="Facebook"></a>
       <a href="https://www.instagram.com/" class="icon icon-instagram" target="_blank" title="Instagram"></a>
@@ -17,7 +19,8 @@
       *ngIf="!loginService.getUserLogged()" id="btnLogin">Login</button>
 
     <ul class="nav-item dropdown mt-0 mb-0" ngbDropdown
-        *ngIf="loginService.getUserLogged()">
+        *ngIf="loginService.getUserLogged() 
+          && !loginService.verPortfolio">
       <a class="nav-link dropdown-toggle text-black bg-white d-inline-block" 
         id="navbarScrollingDropdown" 
         title="Usuario"
@@ -84,6 +87,10 @@
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
           routerLink="/proyectos">Proyectos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+          routerLink="/contacto-datos/1">Contacto</a>
         </li>
       </ol>
     </div>

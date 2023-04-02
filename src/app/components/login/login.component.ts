@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   eForm = Form; // var de uso en Template/ngIf
   verForm: Form = Form.CUENTA;
 
-
+  
   constructor(private route: Router,
     private activatedRoute: ActivatedRoute,
     private loginService: LoginService) { 
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
 
     this.editarDatos = false;
     this.loginerror = "";
+    // this.fecha.split(" ")[0].split(",").reverse().join("-");
 
     if(this.loginService.getUserLogged()){ 
       this.usuario = this.loginService.usuario;
@@ -65,7 +66,8 @@ export class LoginComponent implements OnInit {
   }
 
   iniciarSesion() {
-    if (!confirm("El acceso a datos puede demorar ....\n"
+    if (!this.loginService.backendConn &&
+      !confirm("El acceso a datos puede demorar ....\n"
       +"Espera hasta máx. 4 min. ?")) {
         this.route.navigate(['']);
         return;
@@ -272,6 +274,7 @@ export class LoginComponent implements OnInit {
   modificarDatos(){
     this.verForm = Form.MODIFICA;
     this.editarDatos = true;
+
     if(this.usuario.isOwner)
       this.getDatosPersonales(this.loginService.idDatosPersonales);
     else
@@ -280,14 +283,35 @@ export class LoginComponent implements OnInit {
   }
   getDatosPersonales(idDatosPersonales: number): void{
     this.loginService.getDatosPersonales(idDatosPersonales)
-      .subscribe( data => {
-      if(data != null){ //verifico no null para acceder a la propiedad
-        this.datos = data;
-      }else{
-        alert("Error: No se han obtenido los Datos.");
-        this.route.navigate([''])
-      }
-    });
+      .subscribe( 
+        {  next: data => {
+          if(data != null){ //verifico no null para acceder a la propiedad
+            this.datos = data;
+          }else{
+            alert("Error: No se han obtenido los Datos.");
+            this.route.navigate([''])
+          }
+        }, 
+        error: err  => {
+          if(err.status === 504)
+            alert("Error 504: El servicio api rest no responde");
+        },
+        complete: () => {
+          console.log('Observer: Operación terminada.')
+        }
+        } 
+        
+      /*  
+        data => {
+          if(data != null){ //verifico no null para acceder a la propiedad
+            this.datos = data;
+          }else{
+            alert("Error: No se han obtenido los Datos.");
+            this.route.navigate([''])
+          }
+        }
+        */
+    );
   }
   emptyDatosPersonales(){
     this.datos = {id: 0, nombre:"", apellido:"", domicilio:"", 

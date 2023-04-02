@@ -819,7 +819,7 @@ modificar(){
       case 'Seccion.PROYECTOS':
           return Seccion.PROYECTOS;
     }
-    return -1;
+    return Seccion.PERFIL;
   }
   //resuelve la conversion de tipos enum/string por parámetros de manera casera
   tipoForm(tipo: string) : Form {
@@ -835,7 +835,7 @@ modificar(){
       case 'Form.BAJA':
         return Form.BAJA;
     }
-    return -1;
+    return Form.INICIO;
   }
 
   //Al no funcionar split() en deploy web lo resuelvo en forma casera

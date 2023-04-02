@@ -208,11 +208,15 @@
                                 ]</label>
                                 <label class="form-label">Fecha de ingreso:
                                     <input type=date name=fechaInicio
-                                    [(ngModel)]="experiencia.fechaInicio" required/>
+                                        [ngModel]='experiencia.fechaInicio | date:"yyyy-MM-dd" '
+                                        (ngModelChange)='experiencia.fechaInicio=$event'
+                                        required/>
                                 </label>
                                 <label *ngIf="!experiencia.isTrabajoActual" class="form-label">Fecha de cese&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                                     <input type=date name=fechaFin
-                                    [(ngModel)]="experiencia.fechaFin"/>
+                                        [ngModel]='experiencia.fechaFin | date:"yyyy-MM-dd" '
+                                        (ngModelChange)='experiencia.fechaFin=$event'
+                                        />
                                 </label>
                             </div>
                             <div class="col-12">
@@ -253,11 +257,15 @@
                             <div class="col-6 mt-3">
                                 <label class="form-label">Fecha de ingreso:
                                     <input type=date name=fechaInicio
-                                    [(ngModel)]="educacion.fechaInicio" required/>
+                                        [ngModel]='educacion.fechaInicio | date:"yyyy-MM-dd" '
+                                        (ngModelChange)='educacion.fechaInicio=$event'
+                                        required/>
                                 </label>
                                 <label class="form-label">Fecha de egreso&nbsp;:
                                     <input type=date name=fechaFin
-                                    [(ngModel)]="educacion.fechaFin"/>
+                                        [ngModel]='educacion.fechaFin | date:"yyyy-MM-dd" '
+                                        (ngModelChange)='educacion.fechaFin=$event'
+                                    />
                                 </label>
                             </div>  
                             <div class="col-12">
@@ -304,11 +312,15 @@
                             <div class="col-6 mt-3">
                                 <label class="form-label">Fecha de comienzo&nbsp;&nbsp;&nbsp;:
                                     <input type=date name=fechaInicio
-                                    [(ngModel)]="proyecto.fechaInicio"/>
+                                        [ngModel]='proyecto.fechaInicio | date:"yyyy-MM-dd" '
+                                        (ngModelChange)='proyecto.fechaInicio=$event'
+                                        />
                                 </label>
                                 <label class="form-label">Fecha de finalización :
                                     <input type=date name=fechaFin
-                                    [(ngModel)]="proyecto.fechaFin"/>
+                                        [ngModel]='proyecto.fechaFin | date:"yyyy-MM-dd" '
+                                        (ngModelChange)='proyecto.fechaFin=$event'
+                                        />
                                 </label>
                             </div>  
                             <div class="col-12">
@@ -357,13 +369,13 @@
                                 [ {{experiencia.puesto}}  ]
                                 </label>
                                 <label class="form-label row" >
-                                    Fecha de ingreso : {{fechaI}}
+                                    Fecha de ingreso : {{fechaI | date:"dd-MM-yyyy"}}
                                 </label>
                                 <label class="form-label row" *ngIf="experiencia.isTrabajoActual"
                                     type="checkbox=true">Es trabajo actual.
                                 </label>
                                 <label *ngIf="!experiencia.isTrabajoActual">
-                                    Fecha de Cese : {{fechaF}}
+                                    Fecha de Cese : {{fechaF | date:"dd-MM-yyyy"}}
                                 </label>
                             </div>
                             <div class="col-12">
@@ -393,10 +405,10 @@
                             </div>
                             <div>
                                 <label class="form-label row" >
-                                    Fecha de ingreso : {{fechaI}}
+                                    Fecha de ingreso : {{fechaI | date:"dd-MM-yyyy"}}
                                 </label>
                                 <label>
-                                    Fecha de Cese : {{fechaF}}
+                                    Fecha de Cese : {{fechaF | date:"dd-MM-yyyy"}}
                                 </label>
                             </div>
                             <div class="col-12">
@@ -433,10 +445,10 @@
                             </div>
                             <div>
                                 <label class="form-label row" >
-                                    Fecha de comienzo : {{fechaI}}
+                                    Fecha de comienzo : {{fechaI | date:"dd-MM-yyyy"}}
                                 </label>
                                 <label>
-                                    Fecha de finalización : {{fechaF}}
+                                    Fecha de finalización : {{fechaF | date:"dd-MM-yyyy"}}
                                 </label>
                             </div>
                             <div class="col-12">
