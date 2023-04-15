@@ -6,7 +6,7 @@ div#first-card{
 /*especificaciones extras par mostrar la imágen del banner*/
 img.img-fluid{ 
   max-width: 2500px;
-  min-width: 500px;
+  min-width: auto;
   max-height: 300px;
 }
 #banner-edit{

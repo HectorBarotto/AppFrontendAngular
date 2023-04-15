@@ -1,43 +1,42 @@
 <div class="container-fluid seccion" *ngIf="loginService.getUserLogged()">
-    <div>
-        <img src="{{urlFoto}}"
-            onerror="this.src='../assets/images/perfil.png'"
-            class="rounded-circle {{styleInHome}} img-perfil"
-            title="imágen de perfil"
-            alt="mi foto de perfil"/>
+    <div class="row">
+        <div class="col">
+            <img src="{{urlFoto}}"
+                onerror="this.src='../assets/images/perfil.png'"
+                class="rounded-circle {{styleInHome}} img-perfil"
+                title="imágen de perfil"
+                alt="mi foto de perfil"/>
 
-        <button type="button" class="bi bi-pencil-square"
-            style="margin: 10px;"
-            *ngIf="loginService.modoEdicion"
-            title="Acceso de edición" 
-            (click)="editar($event)" id="btnUrlPerfil">
-        </button>
-        <h3 class="px-3" style="display:inline;">{{loginService.datosPersonales.nombre +" "+
-            loginService.datosPersonales.apellido}}</h3>
-    </div>
-    <!--Lista con al menos los últimos dos títulos de estudios cursados-->
-    <div id="contenedor-Info">
-        <div>
-            <ul *ngFor="let titulo of titulos"
-                type="circle">
-                <li>
-                    <div class="row">
-                        <div class="col-sm-8">
-                           <h5>{{titulo}}</h5> 
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <button type="button" class="bi bi-pencil-square"
+                style="margin: 10px;"
+                *ngIf="loginService.modoEdicion"
+                title="Acceso de edición" 
+                (click)="editar($event)" id="btnUrlPerfil">
+            </button>
+            <h3 class="px-3" style="display:inline;">{{loginService.datosPersonales.nombre +" "+
+                loginService.datosPersonales.apellido}}</h3>
         </div>
-        <div>
+        <div class="col">
             <img src="{{ultInst.urlLogo}}" 
                 onerror="this.src='../assets/images/unimg.png'" 
                 class="small-img"
                 title="{{ultInst.institucion}}" 
                 alt="{{ultInst.institucion}}">
-            <h5>{{ultInst.institucion}}</h5>
+            <h5 >{{ultInst.institucion}}</h5>
         </div>
     </div>
+    <!--Lista con al menos los últimos dos títulos de estudios cursados-->
+    <div class="container row m-4">
+        <ul *ngFor="let titulo of titulos"
+            type="circle">
+            <li>
+                <div class="col">
+                    <h5>{{titulo}}</h5> 
+                </div>
+            </li>
+        </ul>
+    </div>
+
     <div id="info-contact">
         <span>{{loginService.datosPersonales.domicilio}} </span>
         <span><a class="enlace-estilo" href="#">Información de contacto</a></span>
@@ -45,16 +44,17 @@
     
     <div class="container-fluid seccion"> <!-- Info Acerca de -->
         <div class="row">
-            <div class="col-sm-11">
-            <h3>Acerca de</h3>
-            <div><p>{{loginService.datosPersonales.sobreMi}}</p></div>
-        </div>
-        <div class="col-sm-1">
-            <button type="button" class="bi bi-pencil-square"
-                *ngIf="loginService.modoEdicion"
-                title="Acceso de edición" 
-                (click)="editar($event)" id="btnSobreMi">
-            </button>
+            <div class="col-sm-10">
+                <h3>Acerca de</h3>
+                <p>{{loginService.datosPersonales.sobreMi}}</p>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="bi bi-pencil-square"
+                    *ngIf="loginService.modoEdicion"
+                    title="Acceso de edición" 
+                    (click)="editar($event)" id="btnSobreMi">
+                </button>
+            </div>
         </div>
     </div>
 </div>
