@@ -1,3 +1,12 @@
+# Argentina Programa 4.0 -Proyecto Final
+## Portfolio
+
+Este proyecto fue aprobado en marzo/2023, se puede ver online en:
+## https://portfolio-hmb.web.app
+Nota: Luego de presentarlo se introdujeron cambios que son de mi utilidad, como el agregado del componente: contacto-datos que me permite de manera ágil y sin la necesidad que el visitante efectúe login para dejar sus datos de contacto, los que son almacenados en la BDatos MySQL de Clever Cloud y puedo como propietario visualizarlos en una lista de ése componente.
+
+## Deploy en: Clever Cloud / Render y Firebase
+
 # FrontendAngular1
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
